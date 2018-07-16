@@ -12,7 +12,7 @@ default_app = firebase_admin.initialize_app(cred)
 
 @app.route("/")
 def home():
-    return render_template('home.html')
+    return open('templates/home.html').read()
 
 @app.route("/users")
 def users():
