@@ -4,16 +4,20 @@
       <link rel="stylesheet" type="text/css" href="/static/css/common.css">
     </head>
   <body>
-    <div>
-      Home
-    </div>
-    <div>
-      <button>Login</button>
-    </div>
     <div id="app">
-      {{ message }}
+      <div>
+        Home {{ user }}
+      </div>
+      <div>
+        <button v-on:click="login">Login</button>
+      </div>
+      <div>
+        {{ message }}
+      </div>
     </div>
   </body>
   <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
+  <script src="/static/js/firebase.js"></script>
   <script src="/static/js/base.js"></script>
 </html>
