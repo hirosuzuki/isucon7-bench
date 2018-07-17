@@ -6,14 +6,21 @@
   <body>
     <div id="app">
       <div>
-        Home {{ user }}
+        Home {{ user ? user.email: "" }}
       </div>
       <div>
-        <button v-on:click="login">Login</button>
-      </div>
+        <button v-if="!user" v-on:click="login">Login</button>
+        <button v-if="user" v-on:click="logout">Logout</button>
+        <button v-if="user" v-on:click="request">Request Task</button>
+        </div>
       <div>
         {{ message }}
       </div>
+      <table>
+        <tr v-for="row in tasks">
+          <td>{{ row }}</td>
+        </tr>
+      </table>
     </div>
   </body>
   <script src="https://cdn.jsdelivr.net/npm/vue"></script>
