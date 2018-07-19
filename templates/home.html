@@ -18,10 +18,23 @@
       <div class="container">
         <button v-if="user" v-on:click="request">Request Task</button>
         <div>
-          {{ message }}
-          <table>
+          <h2>Tasks</h2>
+          <table class="tasks">
+            <tr>
+              <th>Job #</th>
+              <th>E-Mail</th>
+              <th>Server</th>
+              <th>Requested</th>
+              <th>Status</th>
+              <th>Score</th>
+            </tr>
             <tr v-for="row in tasks">
-              <td>{{ row }}</td>
+              <td>{{ row.jobid }}</td>
+              <td>{{ row.email }}</td>
+              <td>{{ row.server }}</td>
+              <td>{{ datestr(row.posttime) }}</td>
+              <td>{{ statusstr(row.status) }}</td>
+              <td class="task-score">{{ row.score }}</td>
             </tr>
           </table>
         </div>

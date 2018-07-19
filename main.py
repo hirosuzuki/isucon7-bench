@@ -1,7 +1,8 @@
-from flask import Flask, render_template, Response
+from flask import Flask, render_template, Response, request
 
 import json
 import time
+import random
 
 import firebase_admin
 from firebase_admin import credentials, auth, firestore, db
@@ -34,16 +35,36 @@ def tasks():
     data = doc_ref.get()
     return Response(json.dumps(data.to_dict()), mimetype="application/json")
 
+CHARS = "0123456789ABCDEF"
+
 @app.route("/request", methods=['POST'])
-def request():
-    tasks_ref = db.reference('tasks')
-    new_task_ref = tasks_ref.push()
+def request_task():
+    jobid = "".join(random.choice(CHARS) for i in range(48))
+    email = request.json.get("email")
+    server = request.json.get("server")
+    now = int(time.time())
+
     data = {
-        'jobid': 1,
-        'created': time.time(),
+        'jobid': jobid,
+        'email': email,
+        'server': server,
+        'posttime': now,
+        'starttime': None,
+        'endtime': None,
+        'status': 0,
+        'score': 0,
     }
+
+    tasks_ref = db.reference('tasks')
+    tasks = tasks_ref.get()
+    if tasks:
+        for key, task in tasks.items():
+            if task.get("server") == server and task.get("status") == 0:
+                tasks_ref.child(key).set({})
+
+    new_task_ref = tasks_ref.push()
     new_task_ref.set(data)
-    print(data)
+
     return Response("OK", mimetype="application/json")
 
 @app.route("/bench", methods=['POST'])
