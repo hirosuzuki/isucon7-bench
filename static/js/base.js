@@ -9,7 +9,8 @@ var app = new Vue({
     login: function () {
       console.log("login");
       var provider = new firebase.auth.GoogleAuthProvider();
-      firebase.auth().signInWithRedirect(provider);
+      //firebase.auth().signInWithRedirect(provider);
+      firebase.auth().signInWithPopup(provider);
     },
     logout: function () {
       console.log("logout");

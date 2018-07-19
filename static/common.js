@@ -11,7 +11,8 @@ firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error
 var provider = new firebase.auth.GoogleAuthProvider();
 
 document.querySelector("#login-button").addEventListener("click", function () {
-  firebase.auth().signInWithRedirect(provider);
+  // firebase.auth().signInWithRedirect(provider);
+  firebase.auth().signInWithPopup(provider);
 });
 
 document.querySelector("#logout-button").addEventListener("click", function () {

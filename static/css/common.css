@@ -1,0 +1,30 @@
+.header {
+    height: 60px;
+    color: #fff;
+    background: #333;
+    line-height: 32px;
+    font-size: 20px;
+    padding: 4px 12px;
+    display: flex;
+    justify-content: space-between;
+    vertical-align: middle;
+    align-items: center;
+}
+
+.header-menu a:hover {
+    filter: brightness(75%);
+}
+
+.header-signout {
+    line-height: 24px;
+    color: #fff;
+    font-size: 14px;
+    border-radius: 2px;
+    background: #4285F4;
+    padding: 10px;
+    font-weight: 600;
+}
+
+.container {
+    padding: 8px;
+}

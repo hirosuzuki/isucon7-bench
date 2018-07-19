@@ -5,22 +5,27 @@
     </head>
   <body>
     <div id="app">
-      <div>
-        Home {{ user ? user.email: "" }}
-      </div>
-      <div>
-        <button v-if="!user" v-on:click="login">Login</button>
-        <button v-if="user" v-on:click="logout">Logout</button>
-        <button v-if="user" v-on:click="request">Request Task</button>
+      <div class="header">
+        <div class="header-title">
+          ISUCON7 Bench
         </div>
-      <div>
-        {{ message }}
+        <div class="header-menu">
+          {{ user ? user.email: "" }}
+          <a v-if="!user" v-on:click="login"><img src="/static/img/btn_google_signin_dark_normal_web.png"></a>
+          <a v-if="user" v-on:click="logout" class="header-signout">Signout</a>
+        </div>
       </div>
-      <table>
-        <tr v-for="row in tasks">
-          <td>{{ row }}</td>
-        </tr>
-      </table>
+      <div class="container">
+        <button v-if="user" v-on:click="request">Request Task</button>
+        <div>
+          {{ message }}
+          <table>
+            <tr v-for="row in tasks">
+              <td>{{ row }}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
     </div>
   </body>
   <script src="https://cdn.jsdelivr.net/npm/vue"></script>
