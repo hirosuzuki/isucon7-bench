@@ -10,7 +10,7 @@
           ISUCON7 Bench
         </div>
         <div class="header-menu">
-          {{ user ? user.email: "" }}
+          {{ userinfo() }}
           <a v-if="!user" v-on:click="login"><img src="/static/img/btn_google_signin_dark_normal_web.png"></a>
           <a v-if="user" v-on:click="logout" class="header-signout">Signout</a>
         </div>

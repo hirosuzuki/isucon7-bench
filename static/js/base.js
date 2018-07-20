@@ -9,6 +9,17 @@ var app = new Vue({
   computed: {
   },
   methods: {
+    userinfo: function () {
+      if (this.user) {
+        var email = this.user.email
+        var title = email
+        if (this.users && this.users[email]) {
+          title += " on " + this.users[email].server
+        }
+        return title
+      }
+      return ""
+    },
     statusstr: function (v) {
       switch (v) {
         case 0: return "-";
