@@ -3,6 +3,8 @@ from flask import Flask, render_template, Response, request
 import json
 import time
 import random
+import re
+import os
 
 import firebase_admin
 from firebase_admin import credentials, auth, firestore, db
@@ -17,23 +19,6 @@ default_app = firebase_admin.initialize_app(cred, {
 @app.route("/")
 def home():
     return open('templates/home.html').read()
-
-@app.route("/users")
-def users():
-    page = auth.list_users()
-    users = []
-    while page:
-        for user in page.users:
-            users.append(user.email)
-        page = page.get_next_page()
-    return Response(json.dumps(users), mimetype="application/json")
-
-@app.route("/tasks")
-def tasks():
-    db = firestore.client()
-    doc_ref = db.collection(u'tasks').document(u'id')
-    data = doc_ref.get()
-    return Response(json.dumps(data.to_dict()), mimetype="application/json")
 
 CHARS = "0123456789ABCDEF"
 
@@ -67,30 +52,16 @@ def request_task():
 
     return Response("OK", mimetype="application/json")
 
-@app.route("/bench", methods=['POST'])
-def bench():
-    def run():
-        p = Popen([
-                "/home/isucon/isubata/bench/bin/bench",
-                "-remotes",
-                "104.198.80.0:80",
-                "-data",
-                "/home/isucon/isubata/bench/data/",
-                "-output",
-                "/tmp/1.json"
-            ], stdout=PIPE, stderr=PIPE
-            )
-        for line in p.stderr:
-            yield line
-    return Response(run(), mimetype="text/plain")
-
-@app.route("/token", methods=['POST'])
-def req():
-    idToken = request.headers.get("X-ID-TOKEN", "")
-    decoded_token = auth.verify_id_token(idToken)
-    print(decoded_token)
-    uid = decoded_token['uid']
-    return "OK"
+@app.route("/result/<jobid>")
+def view_result(jobid):
+    if not re.match(r'^[0123456789ABCDEF]+$', jobid):
+        return "-"
+    result_filename = "/var/isucon7/%s.json" % jobid
+    if not os.path.exists(result_filename):
+        return "-"
+    result = json.load(open(result_filename))
+    return render_template("result.html", result=result)
+    return Response(json.dumps(result, indent=2), mimetype="application/json")
 
 if __name__ == "__main__":
     app.run(debug=True)

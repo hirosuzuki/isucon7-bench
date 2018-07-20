@@ -1,0 +1,42 @@
+<html>
+  <head>
+  </head>
+  <body>
+    <h2>Basic Info</h2>
+    <table>
+      <tr>
+        <th>Score</th><td>{{ result.score }}</td>
+      </tr>
+      <tr>
+        <th>Start Time</th><td>{{ result.start_time }}</td>
+      </tr>
+      <tr>
+        <th>End Time</th><td>{{ result.end_time }}</td>
+      </tr>
+      <tr>
+        <th>Message</th><td>{{ result.message }}</td>
+      </tr>
+      <tr>
+        <th>Pass</th><td>{{ result.pass }}</td>
+      </tr>
+      <tr>
+        <th>IP Address</th><td>{{ result.ip_addrs }}</td>
+      </tr>
+      <tr>
+        <th>Load Level</th><td>{{ result.load_level }}</td>
+      </tr>
+    </table>
+    <h2>Log</h2>
+    <pre>
+      {% for line in result.log %}
+      {{- line }}
+      {% endfor %}
+    </pre>
+    <h2>Error</h2>
+    <pre>
+      {% for line in result.error %}
+      {{- line }}
+      {% endfor %}
+    </pre>
+  </body>
+</html>

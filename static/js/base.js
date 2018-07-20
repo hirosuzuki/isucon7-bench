@@ -11,13 +11,15 @@ var app = new Vue({
   methods: {
     statusstr: function (v) {
       switch (v) {
-        case 0: return "Waiting";
+        case 0: return "-";
         case 1: return "Executing";
-        default: return "-"
+        case 2: return "Done";
+        default: return "";
       }
     },
     datestr: function (ts) {
-        var pad = function (v) {
+      if (!ts) return "-";
+      var pad = function (v) {
         return v < 10 ? '0' + v : v;
       }
       var d = new Date( ts * 1000 );

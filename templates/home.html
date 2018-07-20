@@ -25,14 +25,18 @@
               <th>E-Mail</th>
               <th>Server</th>
               <th>Requested</th>
+              <th>Started</th>
+              <th>Ended</th>
               <th>Status</th>
               <th>Score</th>
             </tr>
             <tr v-for="row in tasks">
-              <td>{{ row.jobid }}</td>
+              <td><a target="result" v-bind:href="'/result/' + row.jobid">{{ row.jobid }}</a></td>
               <td>{{ row.email }}</td>
               <td>{{ row.server }}</td>
               <td>{{ datestr(row.posttime) }}</td>
+              <td>{{ datestr(row.starttime) }}</td>
+              <td>{{ datestr(row.endtime) }}</td>
               <td>{{ statusstr(row.status) }}</td>
               <td class="task-score">{{ row.score }}</td>
             </tr>
