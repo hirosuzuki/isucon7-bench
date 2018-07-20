@@ -1,9 +1,12 @@
 <html>
   <head>
+    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap-reboot.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/common.css">
   </head>
   <body>
+    <div class="results">
     <h2>Basic Info</h2>
-    <table>
+    <table class="basic-info">
       <tr>
         <th>Score</th><td>{{ result.score }}</td>
       </tr>
@@ -27,16 +30,17 @@
       </tr>
     </table>
     <h2>Log</h2>
-    <pre>
-      {% for line in result.log %}
-      {{- line }}
-      {% endfor %}
+    <pre class="log">
+{%- for line in result.log -%}
+{{ line }}
+{% endfor -%}
     </pre>
     <h2>Error</h2>
-    <pre>
-      {% for line in result.error %}
-      {{- line }}
-      {% endfor %}
+    <pre class="log">
+{%- for line in result.error -%}
+{{ line }}
+{% endfor -%}
     </pre>
+    </div>
   </body>
 </html>

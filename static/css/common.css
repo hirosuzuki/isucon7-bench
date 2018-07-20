@@ -52,3 +52,28 @@
 .task-score {
     text-align: right;
 }
+
+div.results {
+    padding: 4px;
+}
+
+table.basic-info {
+    border: 1px solid #333;
+}
+
+table.basic-info th, table.basic-info td {
+    padding: 2px 4px;
+    border: 1px solid #333;
+}
+
+table.basic-info th {
+    text-align: right;
+    background: #eee;
+}
+
+pre.log {
+    font-size: 0.75rem;
+    padding: 4px;
+    border: 1px solid #333;
+    background: #eee;
+}
